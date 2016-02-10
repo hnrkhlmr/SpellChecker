@@ -1,0 +1,77 @@
+﻿@model SpellChecker.Models.TestViewModel
+
+@{
+    ViewBag.Title = "SpellTest";
+}
+
+<h2>SpellTest</h2>
+
+
+@using (Html.BeginForm("SpellTest", "Spell", FormMethod.Post, new { id = "spellform", autocomplete = "off" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.UserTestId)
+    @Html.HiddenFor(m => m.ShowSwedish)
+    @Html.HiddenFor(m => m.AudioOn)
+    
+    <div class="form-horizontal">
+        <hr />
+        <div id="sticky">
+            <div class="form-group">
+                @Html.LabelFor(model => model.TestRights, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TestRights, new { htmlAttributes = new { @id = "spellrights", @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TestWrongs, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TestWrongs, new { htmlAttributes = new { @id = "spellwrongs", @class = "form-control" } })
+                </div>
+            </div>
+        </div>
+        
+        <div>@Model.Words.Count()</div>
+        @if (Model.Words.Any())
+        {
+            <table class="table-striped">               
+
+                @for (int i = 0; i < Model.Words.Count(); i++)
+                {
+                <tr>
+                    <td>@Html.HiddenFor(m => m.Words[i].WordId)</td>
+                    @if (Model.ShowSwedish)
+                    {
+                        <td>@Html.DisplayFor(m => m.Words[i].SwedishText, new { @class = "control-label col-md-2" })</td>
+                    }
+                    else
+                    {
+                        <td>@Html.HiddenFor(m => m.Words[i].SwedishText)</td>
+                    }
+                    <td>
+                        @Html.Raw(@"<audio id='audio_" + 
+                        Model.Words[i].WordId.ToString() + "'>" +
+                        "<source src='../Data/" + @Model.Words[i].EnglishText.ToLower() + ".mp3' type='audio/mpeg' />" +
+                        "<source src='https://ssl.gstatic.com/dictionary/static/sounds/de/0/" + @Model.Words[i].EnglishText.ToLower() + ".mp3' type='audio/mpeg' />" +
+                        "</audio>")               
+                    </td>
+                    <td>@Html.HiddenFor(m => m.Words[i].EnglishText, new { @id = "theword_" + Model.Words[i].WordId.ToString() })</td>
+                    <td>@Html.EditorFor(m => m.Words[i].Input, new { htmlAttributes = new { @class = "skriv form-control", @id = "inputWord_" + Model.Words[i].WordId.ToString() } })</td>
+                </tr>
+                }
+            </table>
+        }
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save Test" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

@@ -1,0 +1,54 @@
+﻿@model SpellChecker.Models.SpellingBeeSelectionViewModel
+
+@{
+    ViewBag.Title = "Pick Test";
+}
+
+<h2>Select a Spelling Bee</h2>
+
+@using (Html.BeginForm("SpellTest", "Spell", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.SpellingBeeList.SpellingBees, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.SpellingBeeList.SelectedSpellingBee, Model.SpellingBeeList.SpellingBees, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.SpellingBeeList.SelectedSpellingBee, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ShowSwedish, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.ShowSwedish)
+                    @Html.ValidationMessageFor(model => model.ShowSwedish, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AudioOn, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.AudioOn)
+                    @Html.ValidationMessageFor(model => model.AudioOn, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Start Test" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<SpellChecker.Models.SpellingBeeTestStatViewModel>
+
+@{
+    ViewBag.Title = "Statistics";
+}
+
+<h2>Statistics</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SpellingBeeTestName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfTests)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AverageScore)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.HiddenFor(modelItem => item.SpellingBeeTestId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SpellingBeeTestName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberOfTests)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AverageScore)
+        </td>
+    </tr>
+}
+
+</table>

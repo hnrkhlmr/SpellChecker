@@ -1,0 +1,56 @@
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Logs and databases #
+######################
+*.log
+*log.txt
+*Words.txt
+*.sql
+*.sqlite
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+SpellChecker/Web.Release.config
+*.nupkg
+*.psd1
+*.psm1
+packages/
+*.ldf
+SpellChecker.Dal.Tests/bin/
+SpellChecker.Dal.Tests/obj/
+SpellCheckerTests/bin/
+SpellCheckerTests/obj/
+SpellChecker/bin/
+SpellChecker/obj/
+SpellChecker.Dal/bin/
+SpellChecker.Dal/obj/
+TestResults/
+*.suo

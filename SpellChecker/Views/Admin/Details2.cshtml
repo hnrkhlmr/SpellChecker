@@ -1,0 +1,50 @@
+﻿@model SpellChecker.Models.SpellingBeeTestStatViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SpellingBeeTestStatViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SpellingBeeTestId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SpellingBeeTestId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SpellingBeeTestName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SpellingBeeTestName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfTests)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfTests)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AverageScore)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AverageScore)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
