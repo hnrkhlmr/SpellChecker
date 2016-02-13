@@ -18,5 +18,6 @@ namespace SpellChecker.Dal
         void UpdateUserTestscore(int userTestId, int score);
         IEnumerable<ApplicationUser> GetUsers();
         int GetUserTestCountByUserId(int userId);
+        IEnumerable<TestWordDto> GetWordsForTest(int spellingBeeId);
     }
 }

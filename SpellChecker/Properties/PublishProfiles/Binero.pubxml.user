@@ -70,10 +70,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/05/2016 11:17:30</publishTime>
     </File>
     <File Include="bin/SpellChecker.Dal.dll">
-      <publishTime>02/10/2016 20:30:32</publishTime>
+      <publishTime>02/12/2016 07:59:53</publishTime>
     </File>
     <File Include="bin/SpellChecker.dll">
-      <publishTime>02/10/2016 20:44:06</publishTime>
+      <publishTime>02/12/2016 17:59:13</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>01/05/2016 11:17:18</publishTime>
@@ -406,13 +406,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/27/2016 12:19:54</publishTime>
     </File>
     <File Include="Views/Spell/SpellTest.cshtml">
-      <publishTime>02/08/2016 09:08:28</publishTime>
+      <publishTime>02/12/2016 18:00:48</publishTime>
     </File>
     <File Include="Views/Spell/SpellTestResult.cshtml">
       <publishTime>01/29/2016 22:58:12</publishTime>
     </File>
     <File Include="Views/Stats/Index.cshtml">
-      <publishTime>02/10/2016 20:26:32</publishTime>
+      <publishTime>02/12/2016 18:04:22</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>01/05/2016 11:17:01</publishTime>

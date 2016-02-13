@@ -15,6 +15,7 @@ namespace SpellChecker.Dal.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            
         }
 
         protected override void Seed(SpellChecker.Dal.SpellCheckerContext context)

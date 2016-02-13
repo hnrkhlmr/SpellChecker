@@ -91,25 +91,10 @@ namespace SpellChecker.Controllers
                 if (ModelState.IsValid && spellingBeeModel != null)
                 {
                     var selectedBeeId = spellingBeeModel.SpellingBeeList.SelectedSpellingBee;
-                    var words = _repository.All.Where(w => w.SpellingBeeTestId.Equals(selectedBeeId)).ToList();
-                    //skapa testwords
-                    var testWords = words.Select(w =>
-                        new TestWord
-                        {
-                            WordId = w.WordId
-                        }).ToList();
-                    //skapa usertest
-                    var userTest = new UserTest()
-                    {
-                        ApplicationUserId = appUser.Id,
-                        SpellingBeeTestId = selectedBeeId,
-                        TestDate = DateTime.Now,
-                        TestWords = testWords
-                    };
-                    var userTestId = _repository.CreateUserTest(userTest);
-                    //spara usertest
+                    var words = _repository.GetWordsForTest(selectedBeeId);
+
                     var model = new TestViewModel();
-                    model.UserTestId = userTestId;
+                    model.SpellingBeeTestId = spellingBeeModel.SpellingBeeList.SelectedSpellingBee; 
                     model.ShowSwedish = spellingBeeModel.ShowSwedish;
                     var audioOn = spellingBeeModel.AudioOn;
                     model.Words = words.Select(m =>
@@ -132,29 +117,50 @@ namespace SpellChecker.Controllers
         [HttpPost]
         public ActionResult SpellTest(FormCollection collection, TestViewModel model)
         {
+            var words = _repository.GetWordsForTest(model.SpellingBeeTestId);
+            ////skapa testwords
+            //var testWords = words.Select(w =>
+            //    new TestWord
+            //    {
+            //        WordId = w.WordId
+            //    }).ToList();
+            
             //TODO: Flytta skapandet av testet hit. Då slipper man tomma test om anv avbryter testet utan att spara.
             // TODO: hantera browser-navigering.
+            var testWords = new List<TestWord>();
+
             foreach (var word in model.Words)
             {
                 var testWord = new TestWord();
-                testWord.UserTestId = model.UserTestId;
                 testWord.WordId = word.WordId;
-
+                
                 var right = string.IsNullOrEmpty(word.Input) ? false : word.EnglishText.Equals(word.Input.ToLower());
                 if (right)
                 {
                     testWord.Correct = true;
                 }
-
-                _repository.CreateTestWord(testWord);
+                testWords.Add(testWord);
+                //_repository.CreateTestWord(testWord);
             }
+            var appUser = SpellUserManager.FindByName(User.Identity.Name);
+            //skapa usertest
+            var userTest = new UserTest()
+            {
+                ApplicationUserId = appUser.Id,
+                SpellingBeeTestId = model.SpellingBeeTestId,
+                TestDate = DateTime.Now,
+                TestWords = testWords
+            };
+            //Creates UserTest and TestWord in one call.
+            var userTestId = _repository.CreateUserTest(userTest);
+            
             var percentage = Convert.ToInt32(Decimal.Round((Convert.ToDecimal(model.TestRights) / Convert.ToDecimal(model.Words.Count)), 2) * 100);
             var testResultViewModel = new TestResultViewModel()
             {
                 RightPercentage = percentage
             };
             //Uppdatera UserTest med procenten
-            _repository.UpdateUserTestscore(model.UserTestId, percentage);
+            _repository.UpdateUserTestscore(model.SpellingBeeTestId, percentage);
             
             return RedirectToAction("SpellTestResult", testResultViewModel);
         }

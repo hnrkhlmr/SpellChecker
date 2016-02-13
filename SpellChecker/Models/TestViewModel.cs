@@ -11,7 +11,7 @@ namespace SpellChecker.Models
 {
     public class TestViewModel
     {
-        public int UserTestId { get; set; }
+        public int SpellingBeeTestId { get; set; }
         public List<WordViewModel> Words { get; set; }
         public bool ShowSwedish { get; set; }
         public bool AudioOn { get; set; }

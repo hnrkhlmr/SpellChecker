@@ -10,7 +10,7 @@
 @using (Html.BeginForm("SpellTest", "Spell", FormMethod.Post, new { id = "spellform", autocomplete = "off" }))
 {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(m => m.UserTestId)
+    @Html.HiddenFor(m => m.SpellingBeeTestId)
     @Html.HiddenFor(m => m.ShowSwedish)
     @Html.HiddenFor(m => m.AudioOn)
     

@@ -12,6 +12,7 @@ namespace SpellChecker.Dal.DomainObjects
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int SpellingBeeTestId { get; set; }
         public string Name { get; set; }
+        public int WordsPerTest { get; set; }
         public ICollection<Word> Words { get; set; }
         public ICollection<SearchTag> Tags { get; set; }
         public ICollection<UserTest> UserTests { get; set; }
